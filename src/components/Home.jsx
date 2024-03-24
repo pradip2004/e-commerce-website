@@ -24,7 +24,13 @@ function Home() {
 
       useEffect(()=>{
             if(!filteredProducts || category == "undefined") setfilteredProducts(product)
-            if (category != "undefined") getProductCategory()
+            if (category != "undefined") {
+                  // getProductCategory()
+                  setfilteredProducts(product.filter((p)=> p.category == category))
+
+            }
+
+                  
       }, [category, product])
 
       return (
