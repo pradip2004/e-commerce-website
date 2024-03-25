@@ -3,6 +3,8 @@ import React, { useContext, useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
 import { productContext } from '../utils/context';
 
+
+
 function Edit() {
       const [products, setProducts] = useContext(productContext)
       const navigate = useNavigate();
@@ -16,7 +18,7 @@ function Edit() {
       });
 
       const changeHandler = (e) => {
-            setProduct({...product, [e.target.name]: e.target.value})
+            setProduct({ ...product, [e.target.name]: e.target.value })
       }
 
 
@@ -38,10 +40,13 @@ function Edit() {
                   return;
             }
 
-            
-            // setProducts([...products, product]);
-            // localStorage.setItem("products", JSON.stringify([...products, product]))
-            // navigate("/")
+            const pi = products.findIndex((p) => p.id == id);
+            const copyData = [...products];
+            copyData[pi] = { ...products[pi], ...product }
+
+            setProducts(copyData);
+            localStorage.setItem("products", JSON.stringify(copyData))
+            navigate(-1)
             // console.log(product)
       }
 
